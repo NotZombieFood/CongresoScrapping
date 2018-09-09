@@ -30,51 +30,75 @@ for url in urls:
     html = urlopen(url).read()
     soup = BeautifulSoup(html, "html.parser")
     nombre = soup.find("h1", attrs={"class": "title"}).text
-    distrito_stuff = soup.find("h3").text.lower()
-    if 'proporcional' in distrito_stuff:
-        distrito = 'RP'
-    elif ' i,' in distrito_stuff:
-        distrito = '1'
-    elif ' ii,' in distrito_stuff:
-        distrito = '2'
-    elif ' iii,' in distrito_stuff:
-        distrito = '3'
-    elif ' iv,' in distrito_stuff:
-        distrito = '4'
-    elif ' v,' in distrito_stuff:
-        distrito = '5'
-    elif ' vi,' in distrito_stuff:
-        distrito = '6'
-    elif ' vii,' in distrito_stuff:
-        distrito = '7'
-    elif ' viii,' in distrito_stuff:
-        distrito = '8'
-    elif ' ix,' in distrito_stuff:
-        distrito = '9'
-    elif ' x,' in distrito_stuff:
-        distrito = '10'
-    elif ' xi,' in distrito_stuff:
-        distrito = '11'
-    elif ' xii,' in distrito_stuff:
-        distrito = '12'
-    elif ' xiii,' in distrito_stuff:
-        distrito = '13'
-    elif ' xiv,' in distrito_stuff:
-        distrito = '14'
-    elif ' xv,' in distrito_stuff:
-        distrito = '15'
-    elif ' xvi,' in distrito_stuff:
-        distrito = '16'
-    elif ' xvii,' in distrito_stuff:
-        distrito = '17'
-    elif ' xviii,' in distrito_stuff:
-        distrito = '18'
-    elif ' xix,' in distrito_stuff:
-        distrito = '19'
-    elif ' xx,' in distrito_stuff:
-        distrito = '20'
-    else:
-        distrito = ''
+    print (url)
+    distrito_h3 = soup.findAll("h3")
+    for distrito_stuff in distrito_h3:
+
+        if 'proporcional' in distrito_stuff.text.lower():
+            distrito = 'RP'
+            break
+        elif ' i,' in distrito_stuff.text.lower():
+            distrito = '1'
+            break
+        elif ' ii,' in distrito_stuff.text.lower():
+            distrito = '2'
+            break
+        elif ' iii,' in distrito_stuff.text.lower():
+            distrito = '3'
+            break
+        elif ' iv,' in distrito_stuff.text.lower():
+            distrito = '4'
+            break
+        elif ' v,' in distrito_stuff.text.lower():
+            distrito = '5'
+            break
+        elif ' vi,' in distrito_stuff.text.lower():
+            distrito = '6'
+            break
+        elif ' vii,' in distrito_stuff.text.lower():
+            distrito = '7'
+            break
+        elif ' viii,' in distrito_stuff.text.lower():
+            distrito = '8'
+            break
+        elif ' ix,' in distrito_stuff.text.lower():
+            distrito = '9'
+            break
+        elif ' x,' in distrito_stuff.text.lower():
+            distrito = '10'
+            break
+        elif ' xi,' in distrito_stuff.text.lower():
+            distrito = '11'
+            break
+        elif ' xii,' in distrito_stuff.text.lower():
+            distrito = '12'
+            break
+        elif ' xiii,' in distrito_stuff.text.lower():
+            distrito = '13'
+            break
+        elif ' xiv,' in distrito_stuff.text.lower():
+            distrito = '14'
+            break
+        elif ' xv,' in distrito_stuff.text.lower():
+            distrito = '15'
+            break
+        elif ' xvi,' in distrito_stuff.text.lower():
+            distrito = '16'
+            break
+        elif ' xvii,' in distrito_stuff.text.lower():
+            distrito = '17'
+            break
+        elif ' xviii,' in distrito_stuff.text.lower():
+            distrito = '18'
+            break
+        elif ' xix,' in distrito_stuff.text.lower():
+            distrito = '19'
+            break
+        elif ' xx,' in distrito_stuff.text.lower():
+            distrito = '20'
+            break
+        else:
+            distrito = ''
     imagen = soup.find("img", attrs={"class": "vc_single_image-img attachment-thumbnail"}).attrs['src']
     contacto =  soup.find("div", attrs={"class": "vc_tta-panel-body"})
     email_stuff = contacto.findAll("span")[0].text.split(' ')
