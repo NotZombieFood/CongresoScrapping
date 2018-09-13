@@ -33,7 +33,6 @@ for url in urls:
     print (url)
     distrito_h3 = soup.findAll("h3")
     for distrito_stuff in distrito_h3:
-
         if 'proporcional' in distrito_stuff.text.lower():
             distrito = 'RP'
             break
