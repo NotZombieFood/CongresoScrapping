@@ -118,7 +118,7 @@ for enlace in urls:
         else:
             distrito = ''
     nombre = soup.find("h5").text
-    resultados = [nombre,imagen,'Veracruz',distrito,email,telefono]
+    resultados = [nombre.replace("\n",""),imagen,'Veracruz',distrito,email.replace("\n",""),telefono]
     with open(r'veracruz.csv', 'a',encoding='UTF-8') as f:
         writer = csv.writer(f)
         writer.writerow(resultados)
