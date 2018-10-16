@@ -19,6 +19,7 @@ def roman_to_int(roman, values={'M': 1000, 'D': 500, 'C': 100, 'L': 50,
                 total -= num1
         return total + num2
 
+diputados_guardados = []
 url = 'http://www.aldf.gob.mx/conoce-tu-diputado-105-1.html'
 html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
@@ -30,10 +31,10 @@ for partido in partidos:
     div_diputados = soup_partido.find("div", attrs={"class": "lista-diputados"})
     diputados = div_diputados.findAll('li')
     for diputado in diputados:
-        print (diputado.find('span',attrs={"class": "nombre"}).text)
+        #print (diputado.find('span',attrs={"class": "nombre"}).text)
         nombre = diputado.find('span',attrs={"class": "nombre"}).text
         imagen = diputado.find("img", attrs={"class": "retrato"}).attrs['src']
-        print (diputado.find('span',attrs={"class": "cargo"}).text.split(' ')[1])
+        #print (diputado.find('span',attrs={"class": "cargo"}).text.split(' ')[1])
         if 'Proporcional' in diputado.find('span',attrs={"class": "cargo"}).text or 'Minor' in diputado.find('span',attrs={"class": "cargo"}).text:
             distrito = 'RP'
         else:
@@ -54,7 +55,9 @@ for partido in partidos:
                         magic_string = mini_li.text.replace('Extensión: ','').replace(' ','')
                         if magic_string != '':
                             telefono = telefono + 'Ext.' + magic_string
-        resultados = [nombre.replace("\n",""),imagen,'Ciudad de México',distrito,correo.replace("\n",""),telefono]
+        if nombre not in diputados_guardados:
+            diputados_guardados.append(nombre)
+            resultados = [nombre.replace("\n",""),imagen,'Ciudad de México',distrito,correo.replace("\n",""),telefono]
         with open(r'cdmx.csv', 'a',encoding='UTF-8') as f:
             writer = csv.writer(f)
             writer.writerow(resultados)
